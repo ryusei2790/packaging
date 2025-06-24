@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+header {
+  height: 80px;      /* ヘッダーの高さ */
+  width: 100%;       /* 横幅いっぱい */
+  background: #eee;  /* 背景色 */
+}
+
+footer {
+  height: 60px;      /* フッターの高さ */
+  width: 100%;
+  background: #ccc;
+}

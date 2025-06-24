@@ -5,8 +5,6 @@ export default function Home() {
     <div>
       <main>
       </main>
-      <footer>
-      </footer> 
     </div>
   );
 }
