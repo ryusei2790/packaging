@@ -29,7 +29,9 @@
         "timezone": "Asia/Tokyo",
         "coordinates": {
           "latitude": 35.6762,
-          "longitude": 139.6503
+          "longitude": 139.6503,
+          "isDeparture": true,
+          "isArrival": false
         }
       },
       "status": "completed"
@@ -62,7 +64,9 @@
         "timezone": "Asia/Tokyo",
         "coordinates": {
           "latitude": 34.6937,
-          "longitude": 135.5023
+          "longitude": 135.5023,
+          "isDeparture": false,
+          "isArrival": true
         }
       },
       "status": "in-progress"
@@ -95,7 +99,9 @@
         "timezone": "Asia/Tokyo",
         "coordinates": {
           "latitude": 35.1815,
-          "longitude": 136.9066
+          "longitude": 136.9066,
+          "isDeparture": false,
+          "isArrival": false
         }
       },
       "status": "completed"
