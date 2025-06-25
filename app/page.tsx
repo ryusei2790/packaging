@@ -1,3 +1,4 @@
+"use client"
 import styles from './page.module.css';
 import WorkList from './components/main/WorkList';
 import NavMap from './components/main/NavMap';
