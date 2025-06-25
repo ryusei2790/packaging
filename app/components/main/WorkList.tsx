@@ -1,35 +1,60 @@
 import styles from './WorkList.module.css';
 import worksData from '../../../works.json';
 
-export default function WorkList() {
-  // isDeparture, isArrivalフラグで出発地・到着地を取得
-  const startWork = worksData.works.find(work => work.location.coordinates.isDeparture);
-  const goalWork = worksData.works.find(work => work.location.coordinates.isArrival);
+type Work = {
+  id: string;
+  title: string;
+  description: string;
+  departure: {
+    city: string;
+    address: string;
+    coordinates: { latitude: number; longitude: number };
+  };
+  arrival: {
+    city: string;
+    address: string;
+    coordinates: { latitude: number; longitude: number };
+  };
+};
 
+type WorkListProps = {
+  onSelect: (work: Work) => void;
+  selectedId: string | null;
+};
+
+export default function WorkList({ onSelect, selectedId }: WorkListProps) {
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.paperStack}>
-        <div className={styles.paper}></div>
-        <div className={styles.paper}></div>
-        <div className={styles.paper}>
-          <div style={{ marginBottom: '1.5rem', textAlign: 'left' }}>
-            <div>
-              <strong>出発地:</strong> {startWork ? `${startWork.location.city}（${startWork.location.coordinates.latitude}, ${startWork.location.coordinates.longitude}）` : '未設定'}
+      {worksData.works.map((work: Work) => {
+        const isSelected = work.id === selectedId;
+        return (
+          <div
+            key={work.id}
+            onClick={() => onSelect(work)}
+            style={{
+              border: isSelected ? '2px solid #1976d2' : '1px solid #ccc',
+              borderRadius: '8px',
+              padding: '12px',
+              marginBottom: '12px',
+              cursor: 'pointer',
+              background: isSelected ? '#e3f2fd' : '#fff',
+            }}
+          >
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+              <span><strong>ID:</strong> {work.id}</span>
+              <span><strong>タイトル:</strong> {work.title}</span>
+              <span><strong>場所:</strong> {work.departure.city} → {work.arrival.city}</span>
             </div>
-            <div>
-              <strong>到着地:</strong> {goalWork ? `${goalWork.location.city}（${goalWork.location.coordinates.latitude}, ${goalWork.location.coordinates.longitude}）` : '未設定'}
-            </div>
+            {isSelected && (
+              <div style={{ marginTop: '0.5rem' }}>
+                <div><strong>説明:</strong> {work.description}</div>
+                <div><strong>出発地:</strong> {work.departure.city}（{work.departure.address}） [{work.departure.coordinates.latitude}, {work.departure.coordinates.longitude}]</div>
+                <div><strong>到着地:</strong> {work.arrival.city}（{work.arrival.address}） [{work.arrival.coordinates.latitude}, {work.arrival.coordinates.longitude}]</div>
+              </div>
+            )}
           </div>
-          <h1>作品一覧 ({worksData.metadata.totalWorks}件)</h1>
-          {worksData.works.map((work) => (
-            <div key={work.id}>
-              <h2>{work.title}</h2>
-              <p>{work.description}</p>
-              <p>場所: {work.location.city}, {work.location.country}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 }
