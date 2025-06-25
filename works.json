@@ -1,132 +1,82 @@
 {
   "works": [
     {
-      "id": "work-001",
-      "title": "サンプルプロジェクト1",
-      "description": "これはサンプルプロジェクトの説明です。",
-      "category": "web",
-      "tags": ["React", "Next.js", "TypeScript"],
-      "image": "/images/work1.jpg",
-      "url": "https://example.com/work1",
-      "github": "https://github.com/username/work1",
-      "technologies": [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS"
-      ],
-      "features": [
-        "レスポンシブデザイン",
-        "SEO最適化",
-        "パフォーマンス最適化"
-      ],
-      "startDate": "2024-01-01",
-      "endDate": "2024-01-15",
-      "date": "2024-01-15",
-      "location": {
+      "id": "delivery-001",
+      "title": "配達依頼A",
+      "description": "東京から大阪への書類配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-20T10:00:00+09:00",
+      "departure": {
         "city": "東京",
-        "country": "日本",
-        "timezone": "Asia/Tokyo",
-        "coordinates": {
-          "latitude": 35.6762,
-          "longitude": 139.6503,
-          "isDeparture": true,
-          "isArrival": false
-        }
+        "address": "東京都千代田区1-1-1",
+        "coordinates": { "latitude": 35.6812, "longitude": 139.7671 }
       },
-      "status": "completed"
-    },
-    {
-      "id": "work-002",
-      "title": "サンプルプロジェクト2",
-      "description": "2つ目のサンプルプロジェクトの説明です。",
-      "category": "mobile",
-      "tags": ["React Native", "Firebase"],
-      "image": "/images/work2.jpg",
-      "url": "https://example.com/work2",
-      "github": "https://github.com/username/work2",
-      "technologies": [
-        "React Native",
-        "Firebase",
-        "JavaScript"
-      ],
-      "features": [
-        "プッシュ通知",
-        "オフライン対応",
-        "リアルタイム同期"
-      ],
-      "startDate": "2024-02-01",
-      "endDate": null,
-      "date": "2024-02-20",
-      "location": {
+      "arrival": {
         "city": "大阪",
-        "country": "日本",
-        "timezone": "Asia/Tokyo",
-        "coordinates": {
-          "latitude": 34.6937,
-          "longitude": 135.5023,
-          "isDeparture": false,
-          "isArrival": true
-        }
+        "address": "大阪市北区梅田1-1-1",
+        "coordinates": { "latitude": 34.7025, "longitude": 135.4959 }
       },
-      "status": "in-progress"
+      "gallery": [
+        "/images/delivery1-1.jpg",
+        "/images/delivery1-2.jpg"
+      ],
+      "status": "pending"
     },
     {
-      "id": "work-003",
-      "title": "サンプルプロジェクト3",
-      "description": "3つ目のサンプルプロジェクトの説明です。",
-      "category": "design",
-      "tags": ["Figma", "UI/UX"],
-      "image": "/images/work3.jpg",
-      "url": "https://example.com/work3",
-      "github": null,
-      "technologies": [
-        "Figma",
-        "Adobe XD",
-        "Photoshop"
-      ],
-      "features": [
-        "ユーザビリティテスト",
-        "プロトタイピング",
-        "デザインシステム"
-      ],
-      "startDate": "2024-03-01",
-      "endDate": "2024-03-10",
-      "date": "2024-03-10",
-      "location": {
+      "id": "delivery-002",
+      "title": "配達依頼B",
+      "description": "名古屋から京都への荷物配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-21T14:30:00+09:00",
+      "departure": {
         "city": "名古屋",
-        "country": "日本",
-        "timezone": "Asia/Tokyo",
-        "coordinates": {
-          "latitude": 35.1815,
-          "longitude": 136.9066,
-          "isDeparture": false,
-          "isArrival": false
-        }
+        "address": "名古屋市中村区名駅1-1-4",
+        "coordinates": { "latitude": 35.1709, "longitude": 136.8815 }
       },
+      "arrival": {
+        "city": "京都",
+        "address": "京都市下京区烏丸通塩小路下ル東塩小路町",
+        "coordinates": { "latitude": 34.9855, "longitude": 135.7588 }
+      },
+      "gallery": [
+        "/images/delivery2-1.jpg",
+        "/images/delivery2-2.jpg",
+        "/images/delivery2-3.jpg"
+      ],
       "status": "completed"
+    },
+    {
+      "id": "delivery-003",
+      "title": "配達依頼C",
+      "description": "福岡から広島へのサンプル品配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-22T09:00:00+09:00",
+      "departure": {
+        "city": "福岡",
+        "address": "福岡市博多区博多駅中央街1-1",
+        "coordinates": { "latitude": 33.5902, "longitude": 130.4207 }
+      },
+      "arrival": {
+        "city": "広島",
+        "address": "広島市南区松原町2-37",
+        "coordinates": { "latitude": 34.3966, "longitude": 132.4750 }
+      },
+      "gallery": [
+        "/images/delivery3-1.jpg"
+      ],
+      "status": "in-progress"
     }
   ],
   "categories": [
     {
-      "id": "web",
-      "name": "Web開発",
-      "description": "WebアプリケーションやWebサイトの開発"
-    },
-    {
-      "id": "mobile",
-      "name": "モバイル開発",
-      "description": "iOS/Androidアプリの開発"
-    },
-    {
-      "id": "design",
-      "name": "デザイン",
-      "description": "UI/UXデザインやグラフィックデザイン"
+      "id": "delivery",
+      "name": "配達依頼",
+      "description": "各地への配達依頼情報"
     }
   ],
   "metadata": {
-    "lastUpdated": "2024-12-19",
-    "version": "1.0.0",
+    "lastUpdated": "2024-06-20",
+    "version": "1.1.0",
     "totalWorks": 3
   }
-} 
+}
