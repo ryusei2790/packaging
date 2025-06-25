@@ -1,12 +1,10 @@
+
 import styles from './page.module.css';
-import WorkList from './components/main/WorkList';
-import NavMap from './components/main/NavMap';
 
 export default function HomePage() {
   return (
     <div className={styles.pageContainer}>
-      <WorkList />
-      <NavMap />
+
     </div>
   );
 }

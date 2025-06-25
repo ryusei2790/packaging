@@ -1,0 +1,9 @@
+.pageContainer {
+    width: 100vw;
+    height: 100vh;
+    margin: 40px auto;     /* 上下40px、左右自動で中央寄せ */
+    padding: 32px 24px; 
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}

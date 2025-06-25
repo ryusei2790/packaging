@@ -1,0 +1,126 @@
+{
+  "works": [
+    {
+      "id": "work-001",
+      "title": "サンプルプロジェクト1",
+      "description": "これはサンプルプロジェクトの説明です。",
+      "category": "web",
+      "tags": ["React", "Next.js", "TypeScript"],
+      "image": "/images/work1.jpg",
+      "url": "https://example.com/work1",
+      "github": "https://github.com/username/work1",
+      "technologies": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "features": [
+        "レスポンシブデザイン",
+        "SEO最適化",
+        "パフォーマンス最適化"
+      ],
+      "startDate": "2024-01-01",
+      "endDate": "2024-01-15",
+      "date": "2024-01-15",
+      "location": {
+        "city": "東京",
+        "country": "日本",
+        "timezone": "Asia/Tokyo",
+        "coordinates": {
+          "latitude": 35.6762,
+          "longitude": 139.6503
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "id": "work-002",
+      "title": "サンプルプロジェクト2",
+      "description": "2つ目のサンプルプロジェクトの説明です。",
+      "category": "mobile",
+      "tags": ["React Native", "Firebase"],
+      "image": "/images/work2.jpg",
+      "url": "https://example.com/work2",
+      "github": "https://github.com/username/work2",
+      "technologies": [
+        "React Native",
+        "Firebase",
+        "JavaScript"
+      ],
+      "features": [
+        "プッシュ通知",
+        "オフライン対応",
+        "リアルタイム同期"
+      ],
+      "startDate": "2024-02-01",
+      "endDate": null,
+      "date": "2024-02-20",
+      "location": {
+        "city": "大阪",
+        "country": "日本",
+        "timezone": "Asia/Tokyo",
+        "coordinates": {
+          "latitude": 34.6937,
+          "longitude": 135.5023
+        }
+      },
+      "status": "in-progress"
+    },
+    {
+      "id": "work-003",
+      "title": "サンプルプロジェクト3",
+      "description": "3つ目のサンプルプロジェクトの説明です。",
+      "category": "design",
+      "tags": ["Figma", "UI/UX"],
+      "image": "/images/work3.jpg",
+      "url": "https://example.com/work3",
+      "github": null,
+      "technologies": [
+        "Figma",
+        "Adobe XD",
+        "Photoshop"
+      ],
+      "features": [
+        "ユーザビリティテスト",
+        "プロトタイピング",
+        "デザインシステム"
+      ],
+      "startDate": "2024-03-01",
+      "endDate": "2024-03-10",
+      "date": "2024-03-10",
+      "location": {
+        "city": "名古屋",
+        "country": "日本",
+        "timezone": "Asia/Tokyo",
+        "coordinates": {
+          "latitude": 35.1815,
+          "longitude": 136.9066
+        }
+      },
+      "status": "completed"
+    }
+  ],
+  "categories": [
+    {
+      "id": "web",
+      "name": "Web開発",
+      "description": "WebアプリケーションやWebサイトの開発"
+    },
+    {
+      "id": "mobile",
+      "name": "モバイル開発",
+      "description": "iOS/Androidアプリの開発"
+    },
+    {
+      "id": "design",
+      "name": "デザイン",
+      "description": "UI/UXデザインやグラフィックデザイン"
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2024-12-19",
+    "version": "1.0.0",
+    "totalWorks": 3
+  }
+} 
