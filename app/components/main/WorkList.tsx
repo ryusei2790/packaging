@@ -25,7 +25,7 @@ type Work = {
 export default function WorkList() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const [worksData, setWorksData] = useState<{ works: Work[] }>({ works: [] });
+  const [worksData, setWorksData] = useState<{ works: Work[] }>({ works: []});
   
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
@@ -82,36 +82,38 @@ export default function WorkList() {
   return (
     <div className={styles.findWorks}>
       {/* 検索ボックス */}
-      <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="タイトル（場所にしたい）で検索" style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%' }}
-      />
+      <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="タイトル（場所にしたい）で検索" />
       {/*リスト表示*/}
-      {currentItems.map((work) => {
-        const isSelected = work.id === selectedId;
-        return (
-          <div key={work.id} onClick={() => handleClick(work.id)}
-          className={styles.paper}
-          style={{border: '1px solid #ccc', marginBottom: '1rem', padding: '1rem', backgroundColor: isSelected ? '#f0f8ff' : 'white', cursor: 'pointer',}}
-          >
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <span><strong>タイトル：</strong> {work.title}</span>
-              <span><strong>場所：</strong> {work.departure.city} → {work.arrival.city} </span>
-            </div>
-            {isSelected && (
-              <div style={{ marginTop: '0.5rem' }}>
-                <div><strong>出発地:</strong> {work.departure.city}（{work.departure.address}） [{work.departure.coordinates.latitude}, {work.departure.coordinates.longitude}]</div>
-                <div><strong>到着地:</strong> {work.arrival.city}（{work.arrival.address}） [{work.arrival.coordinates.latitude}, {work.arrival.coordinates.longitude}]</div>
-              </div>
-            )}
-            </div>
-        );
-      })}
+      <ul>
+        
+          {currentItems.map((work) => {
+            const isSelected = work.id === selectedId;
+            return (
+              <li key={work.id} onClick={() => handleClick(work.id)}
+              className={styles.paper}
+              
+              >
+                <div >
+                  <span><strong>タイトル：</strong> {work.title}</span>
+                  <span><strong>場所：</strong> {work.departure.city} → {work.arrival.city} </span>
+                </div>
+                {isSelected && (
+                  <div >
+                    <div><strong>出発地:</strong> {work.departure.city}（{work.departure.address}） [{work.departure.coordinates.latitude}, {work.departure.coordinates.longitude}]</div>
+                    <div><strong>到着地:</strong> {work.arrival.city}（{work.arrival.address}） [{work.arrival.coordinates.latitude}, {work.arrival.coordinates.longitude}]</div>
+                  </div>
+                )}
+                </li>
+            );
+          })}
+      </ul>
 
       {/* 🔄 ページネーション */}
       <div style={{ textAlign: 'center', marginTop: '1rem' }}>
         <button
           onClick={handlePrev}
           disabled={currentPage === 1}
-          style={{ marginRight: '1rem', padding: '0.5rem 1rem' }}
+          
         >
           ← 前へ
         </button>
@@ -121,7 +123,7 @@ export default function WorkList() {
         <button
           onClick={handleNext}
           disabled={currentPage === totalPages}
-          style={{ marginLeft: '1rem', padding: '0.5rem 1rem' }}
+          
         >
           次へ →
         </button>
