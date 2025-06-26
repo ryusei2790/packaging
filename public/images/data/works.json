@@ -1,7 +1,7 @@
 {
   "works": [
     {
-      "id": "delivery-001",
+      "id": 1,
       "title": "配達依頼A",
       "description": "東京から大阪への書類配達依頼。",
       "category": "delivery",
@@ -23,7 +23,7 @@
       "status": "pending"
     },
     {
-      "id": "delivery-002",
+      "id": 2,
       "title": "配達依頼B",
       "description": "名古屋から京都への荷物配達依頼。",
       "category": "delivery",
@@ -46,7 +46,7 @@
       "status": "completed"
     },
     {
-      "id": "delivery-003",
+      "id": 3,
       "title": "配達依頼C",
       "description": "福岡から広島へのサンプル品配達依頼。",
       "category": "delivery",

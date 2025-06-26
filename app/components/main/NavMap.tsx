@@ -20,7 +20,7 @@ export default function NavMap({ flat, flng, llat, llng }: NavMapProps) {
   return (
     <div className={styles.container}>
       <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
-        <Map defaultZoom={6} defaultCenter={defaultCenter} style={{ width: '100%', height: '400px' }} mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}>
+        <Map defaultZoom={6} defaultCenter={defaultCenter} style={{ width: '400px', height: '400px' }} mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}>
           {hasCoords && <AdvancedMarker position={{ lat: flat!, lng: flng! }} />}
           {hasCoords && <AdvancedMarker position={{ lat: llat!, lng: llng! }} />}
         </Map>
