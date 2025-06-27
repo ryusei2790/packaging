@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from "./Header.module.css";
 import Image from "next/image";
+import LoginButton from "./components/LoginButton";
+
 
 
 export default function Head() {
@@ -11,6 +13,7 @@ export default function Head() {
           <Image src="/images/packaging.png" alt="packa" width={100} height={100} />
         </div>
         <nav className={styles.nav}>
+          <LoginButton />
           <ul className={styles.navList}>
             <li><a href="/" className={styles.navLink}>ホーム</a></li>
             <li><a href="/chat" className={styles.navLink}>チャット</a></li>

@@ -19,7 +19,7 @@ const useEvents = () => {
     const fetchEvents = async () => {
       try {
         // ここで実際のAPIエンドポイントに置き換えてください
-        const response = await fetch('/api/events');
+        const response = await fetch('/deta/works.json');
         if (!response.ok) {
           throw new Error('イベントの取得に失敗しました');
         }
