@@ -3,7 +3,7 @@ import styles from "./Header.module.css";
 import Image from "next/image";
 
 
-export default function Header() {
+export default function Head() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>

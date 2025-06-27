@@ -1,0 +1,499 @@
+<!DOCTYPE html><html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta http-equiv="x-dns-prefetch-control" content="off">
+  <meta name="x-poe-datastore-behavior" content="disabled">
+  <meta name="x-poe-allow-downloads" content="true">
+  <script src="https://puc.poecdn.net/standard.25f6d5ebb7608dc2f276.js"></script>
+    <meta charset="utf-8">
+    <title>Poe</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://puc.poecdn.net/disableWebRTC.9710cebe07429a9e8e06.js"></script>
+  <script src="https://puc.poecdn.net/tw.b9024aecac666455e183.js"></script>
+  <script src="https://puc.poecdn.net/deps.9d1664979ba430ef16a8.js"></script>
+  <script src="https://puc.poecdn.net/exports.b0f0f482cdeb5302b0b9.js"></script>
+  <script src="https://puc.poecdn.net/renderer.75c73ae6b4235f62945a.js"></script>
+  <script>Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _react = require('react'); var _react2 = _interopRequireDefault(_react);
+var _lucidereact = require('lucide-react');
+
+const Dashboard = () => {
+  const [currentPage, setCurrentPage] = _react.useState.call(void 0, 'search'); // 'search' or 'work'
+  const [selectedDate, setSelectedDate] = _react.useState.call(void 0, new Date());
+  const [activeTab, setActiveTab] = _react.useState.call(void 0, 'all');
+
+  // Sample data for search page
+  const availableJobs = [
+    {
+      id: '001',
+      from: '渋谷郵便局',
+      to: '品川郵便局',
+      time: '10:00',
+      reward: 800,
+      weight: '2kg',
+      distance: '5.2km',
+      priority: 'normal'
+    },
+    {
+      id: '002',
+      from: '新宿郵便局',
+      to: '池袋郵便局',
+      time: '14:30',
+      reward: 600,
+      weight: '1.5kg',
+      distance: '3.8km',
+      priority: 'urgent'
+    },
+    {
+      id: '003',
+      from: '東京駅郵便局',
+      to: '上野郵便局',
+      time: '16:00',
+      reward: 700,
+      weight: '1kg',
+      distance: '4.1km',
+      priority: 'normal'
+    }
+  ];
+
+  // Sample data for work page
+  const myJobs = [
+    {
+      id: '001',
+      from: '渋谷郵便局',
+      to: '品川郵便局',
+      status: 'in-progress',
+      time: '10:00',
+      reward: 800,
+      weight: '2kg',
+      priority: 'normal'
+    },
+    {
+      id: '004',
+      from: '新宿郵便局',
+      to: '池袋郵便局',
+      status: 'completed',
+      time: '09:00',
+      reward: 600,
+      weight: '1.5kg',
+      priority: 'normal'
+    },
+    {
+      id: '005',
+      from: '東京駅郵便局',
+      to: '上野郵便局',
+      status: 'pending',
+      time: '18:00',
+      reward: 700,
+      weight: '1kg',
+      priority: 'urgent'
+    }
+  ];
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'pending': return 'bg-yellow-100 text-yellow-800';
+      case 'in-progress': return 'bg-blue-100 text-blue-800';
+      case 'completed': return 'bg-green-100 text-green-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'pending': return _react2.default.createElement(_lucidereact.Clock, { className: "w-4 h-4" ,} );
+      case 'in-progress': return _react2.default.createElement(_lucidereact.Truck, { className: "w-4 h-4" ,} );
+      case 'completed': return _react2.default.createElement(_lucidereact.CheckCircle, { className: "w-4 h-4" ,} );
+      default: return _react2.default.createElement(_lucidereact.AlertCircle, { className: "w-4 h-4" ,} );
+    }
+  };
+
+  const Calendar = () => {
+    const daysInMonth = 30;
+    const firstDay = 3;
+    const today = 15;
+
+    return (
+      _react2.default.createElement('div', { className: "bg-white rounded-lg p-4"  ,}
+        , _react2.default.createElement('div', { className: "flex items-center justify-between mb-4"   ,}
+          , _react2.default.createElement('h3', { className: "font-bold text-gray-900" ,}, "6月 2025" )
+          , _react2.default.createElement('div', { className: "flex space-x-1" ,}
+            , _react2.default.createElement('button', { className: "p-1 hover:bg-gray-100 rounded"  ,}, "‹")
+            , _react2.default.createElement('button', { className: "p-1 hover:bg-gray-100 rounded"  ,}, "›")
+          )
+        )
+
+        , _react2.default.createElement('div', { className: "grid grid-cols-7 gap-1 mb-2"   ,}
+          , ['日', '月', '火', '水', '木', '金', '土'].map(day => (
+            _react2.default.createElement('div', { key: day, className: "text-center text-xs font-medium text-gray-500 p-2"    ,}
+              , day
+            )
+          ))
+        )
+
+        , _react2.default.createElement('div', { className: "grid grid-cols-7 gap-1"  ,}
+          , Array.from({ length: firstDay }).map((_, i) => (
+            _react2.default.createElement('div', { key: `empty-${i}`, className: "p-2",})
+          ))
+          , Array.from({ length: daysInMonth }).map((_, i) => {
+            const day = i + 1;
+            const isToday = day === today;
+            const hasEvent = day === 15 || day === 20 || day === 25;
+            
+            return (
+              _react2.default.createElement('button', {
+                key: day,
+                className: `p-2 text-xs rounded hover:bg-gray-100 relative ${
+                  isToday ? 'bg-blue-600 text-white hover:bg-blue-700' : ''
+                }`,}
+
+                , day
+                , hasEvent && (
+                  _react2.default.createElement('div', { className: `absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
+                    isToday ? 'bg-white' : 'bg-blue-600'
+                  }`,})
+                )
+              )
+            );
+          })
+        )
+      )
+    );
+  };
+
+  const Map = () => (
+    _react2.default.createElement('div', { className: "bg-white rounded-lg p-4 h-full"   ,}
+      , _react2.default.createElement('div', { className: "flex items-center justify-between mb-4"   ,}
+        , _react2.default.createElement('h3', { className: "font-bold text-gray-900" ,}
+          , currentPage === 'search' ? '利用可能な配送ルート' : '配送ルートマップ'
+        )
+        , _react2.default.createElement('button', { className: "p-2 hover:bg-gray-100 rounded"  ,}
+          , _react2.default.createElement(_lucidereact.Settings, { className: "w-4 h-4" ,} )
+        )
+      )
+
+      , _react2.default.createElement('div', { className: "bg-gray-100 rounded-lg h-80 flex items-center justify-center relative overflow-hidden"       ,}
+        , _react2.default.createElement('div', { className: "absolute inset-0 bg-gradient-to-br from-green-100 to-blue-100"    ,})
+
+        , _react2.default.createElement('svg', { className: "absolute inset-0 w-full h-full"   ,}
+          , _react2.default.createElement('path', {
+            d: "M 60 80 Q 150 60 240 100 Q 330 140 420 120"            ,
+            stroke: "#3B82F6",
+            strokeWidth: "3",
+            fill: "none",
+            strokeDasharray: "5,5",}
+          )
+          , currentPage === 'search' && (
+            _react2.default.createElement(_react2.default.Fragment, null
+              , _react2.default.createElement('path', {
+                d: "M 80 120 Q 180 100 280 130"       ,
+                stroke: "#10B981",
+                strokeWidth: "2",
+                fill: "none",}
+              )
+              , _react2.default.createElement('path', {
+                d: "M 100 160 Q 200 140 300 170"       ,
+                stroke: "#F59E0B",
+                strokeWidth: "2",
+                fill: "none",}
+              )
+            )
+          )
+        )
+
+        , _react2.default.createElement('div', { className: "absolute top-16 left-12 bg-red-500 w-4 h-4 rounded-full flex items-center justify-center"         ,}
+          , _react2.default.createElement(_lucidereact.MapPin, { className: "w-3 h-3 text-white"  ,} )
+        )
+        , _react2.default.createElement('div', { className: "absolute top-24 right-16 bg-green-500 w-4 h-4 rounded-full flex items-center justify-center"         ,}
+          , _react2.default.createElement(_lucidereact.MapPin, { className: "w-3 h-3 text-white"  ,} )
+        )
+        , _react2.default.createElement('div', { className: "absolute bottom-20 left-1/3 bg-blue-500 w-4 h-4 rounded-full flex items-center justify-center"         ,}
+          , _react2.default.createElement(_lucidereact.MapPin, { className: "w-3 h-3 text-white"  ,} )
+        )
+
+        , _react2.default.createElement('div', { className: "text-center text-gray-600 z-10"  ,}
+          , _react2.default.createElement(_lucidereact.MapPin, { className: "w-8 h-8 mx-auto mb-2"   ,} )
+          , _react2.default.createElement('p', { className: "text-sm",}
+            , currentPage === 'search' ? '利用可能なルート表示' : '配送ルート表示'
+          )
+        )
+      )
+
+      , _react2.default.createElement('div', { className: "mt-4 space-y-2" ,}
+        , _react2.default.createElement('div', { className: "flex items-center text-sm"  ,}
+          , _react2.default.createElement('div', { className: "w-3 h-3 bg-red-500 rounded-full mr-2"    ,})
+          , _react2.default.createElement('span', null, "出発地点")
+        )
+        , _react2.default.createElement('div', { className: "flex items-center text-sm"  ,}
+          , _react2.default.createElement('div', { className: "w-3 h-3 bg-green-500 rounded-full mr-2"    ,})
+          , _react2.default.createElement('span', null, "到着地点")
+        )
+        , currentPage === 'search' && (
+          _react2.default.createElement('div', { className: "flex items-center text-sm"  ,}
+            , _react2.default.createElement('div', { className: "w-3 h-3 bg-yellow-500 rounded-full mr-2"    ,})
+            , _react2.default.createElement('span', null, "利用可能なルート")
+          )
+        )
+      )
+    )
+  );
+
+  const SearchPage = () => (
+    _react2.default.createElement('div', { className: "flex h-screen" ,}
+      , _react2.default.createElement('div', { className: "w-1/3 bg-white border-r border-gray-200 flex flex-col"     ,}
+        , _react2.default.createElement('div', { className: "p-6 border-b border-gray-200"  ,}
+          , _react2.default.createElement('div', { className: "flex items-center justify-between mb-4"   ,}
+            , _react2.default.createElement('h2', { className: "text-lg font-bold text-gray-900"  ,}, "利用可能な案件")
+            , _react2.default.createElement('button', { className: "p-2 text-gray-600 hover:text-gray-900"  ,}
+              , _react2.default.createElement(_lucidereact.QrCode, { className: "w-4 h-4" ,} )
+            )
+          )
+
+          , _react2.default.createElement('div', { className: "relative mb-4" ,}
+            , _react2.default.createElement(_lucidereact.Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"       ,} )
+            , _react2.default.createElement('input', {
+              type: "text",
+              placeholder: "駅名、エリアで検索...",
+              className: "w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"         ,}
+            )
+          )
+
+          , _react2.default.createElement('div', { className: "flex space-x-2 mb-4"  ,}
+            , _react2.default.createElement('button', { className: "px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"     ,}, "すべて"
+
+            )
+            , _react2.default.createElement('button', { className: "px-3 py-1 text-gray-600 hover:bg-gray-100 rounded-full text-sm"     ,}, "高報酬"
+
+            )
+            , _react2.default.createElement('button', { className: "px-3 py-1 text-gray-600 hover:bg-gray-100 rounded-full text-sm"     ,}, "近距離"
+
+            )
+          )
+
+          , _react2.default.createElement('button', { className: "w-full flex items-center justify-center space-x-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"         ,}
+            , _react2.default.createElement(_lucidereact.Filter, { className: "w-4 h-4" ,} )
+            , _react2.default.createElement('span', { className: "text-sm",}, "詳細フィルター")
+          )
+        )
+
+        , _react2.default.createElement('div', { className: "flex-1 overflow-y-auto" ,}
+          , _react2.default.createElement('div', { className: "p-4 space-y-3" ,}
+            , availableJobs.map((job) => (
+              _react2.default.createElement('div', { key: job.id, className: "border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"      ,}
+                , _react2.default.createElement('div', { className: "flex items-start justify-between mb-2"   ,}
+                  , _react2.default.createElement('div', { className: "flex items-center space-x-2"  ,}
+                    , _react2.default.createElement('span', { className: "font-mono text-sm text-gray-500"  ,}, "#", job.id)
+                    , job.priority === 'urgent' && (
+                      _react2.default.createElement('span', { className: "bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-bold"      ,}, "急ぎ"
+
+                      )
+                    )
+                  )
+                  , _react2.default.createElement('span', { className: "font-bold text-green-600" ,}, "¥", job.reward)
+                )
+
+                , _react2.default.createElement('div', { className: "space-y-1 mb-3" ,}
+                  , _react2.default.createElement('div', { className: "flex items-center text-sm"  ,}
+                    , _react2.default.createElement('span', { className: "text-gray-500 w-12" ,}, "出発:")
+                    , _react2.default.createElement('span', { className: "font-medium",}, job.from)
+                  )
+                  , _react2.default.createElement('div', { className: "flex items-center text-sm"  ,}
+                    , _react2.default.createElement('span', { className: "text-gray-500 w-12" ,}, "到着:")
+                    , _react2.default.createElement('span', { className: "font-medium",}, job.to)
+                  )
+                )
+
+                , _react2.default.createElement('div', { className: "flex items-center justify-between text-sm mb-3"    ,}
+                  , _react2.default.createElement('div', { className: "flex items-center space-x-4"  ,}
+                    , _react2.default.createElement('span', { className: "text-gray-500",}, job.time)
+                    , _react2.default.createElement('span', { className: "text-gray-500",}, job.weight)
+                    , _react2.default.createElement('span', { className: "text-gray-500",}, job.distance)
+                  )
+                )
+
+                , _react2.default.createElement('button', { className: "w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"      ,}, "応募する"
+
+                )
+              )
+            ))
+          )
+        )
+      )
+
+      , _react2.default.createElement('div', { className: "flex-1 flex flex-col"  ,}
+        , _react2.default.createElement('div', { className: "flex-1 p-6" ,}
+          , _react2.default.createElement(Map, null )
+        )
+        , _react2.default.createElement('div', { className: "h-80 p-6 pt-0"  ,}
+          , _react2.default.createElement(Calendar, null )
+        )
+      )
+    )
+  );
+
+  const WorkPage = () => (
+    _react2.default.createElement('div', { className: "flex h-screen" ,}
+      , _react2.default.createElement('div', { className: "w-1/3 bg-white border-r border-gray-200 flex flex-col"     ,}
+        , _react2.default.createElement('div', { className: "p-6 border-b border-gray-200"  ,}
+          , _react2.default.createElement('div', { className: "flex items-center justify-between mb-4"   ,}
+            , _react2.default.createElement('h2', { className: "text-lg font-bold text-gray-900"  ,}, "マイ案件")
+            , _react2.default.createElement('button', { className: "bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700"    ,}
+              , _react2.default.createElement(_lucidereact.Plus, { className: "w-4 h-4" ,} )
+            )
+          )
+
+          , _react2.default.createElement('div', { className: "flex space-x-2 mb-4"  ,}
+            , _react2.default.createElement('button', {
+              onClick: () => setActiveTab('all'),
+              className: `px-3 py-1 rounded-full text-sm ${
+                activeTab === 'all' ? 'bg-blue-100 text-blue-800' : 'text-gray-600 hover:bg-gray-100'
+              }`,}
+, "すべて"
+
+            )
+            , _react2.default.createElement('button', {
+              onClick: () => setActiveTab('pending'),
+              className: `px-3 py-1 rounded-full text-sm ${
+                activeTab === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'text-gray-600 hover:bg-gray-100'
+              }`,}
+, "待機中"
+
+            )
+            , _react2.default.createElement('button', {
+              onClick: () => setActiveTab('progress'),
+              className: `px-3 py-1 rounded-full text-sm ${
+                activeTab === 'progress' ? 'bg-blue-100 text-blue-800' : 'text-gray-600 hover:bg-gray-100'
+              }`,}
+, "配送中"
+
+            )
+          )
+
+          , _react2.default.createElement('button', { className: "w-full flex items-center justify-center space-x-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"         ,}
+            , _react2.default.createElement(_lucidereact.Filter, { className: "w-4 h-4" ,} )
+            , _react2.default.createElement('span', { className: "text-sm",}, "フィルター")
+          )
+        )
+
+        , _react2.default.createElement('div', { className: "flex-1 overflow-y-auto" ,}
+          , _react2.default.createElement('div', { className: "p-4 space-y-3" ,}
+            , myJobs.map((job) => (
+              _react2.default.createElement('div', { key: job.id, className: "border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"      ,}
+                , _react2.default.createElement('div', { className: "flex items-start justify-between mb-2"   ,}
+                  , _react2.default.createElement('div', { className: "flex items-center space-x-2"  ,}
+                    , _react2.default.createElement('span', { className: "font-mono text-sm text-gray-500"  ,}, "#", job.id)
+                    , _react2.default.createElement('span', { className: `inline-flex items-center space-x-1 px-2 py-1 rounded-full text-xs ${getStatusColor(job.status)}`,}
+                      , getStatusIcon(job.status)
+                      , _react2.default.createElement('span', null
+                        , job.status === 'pending' && '待機中'
+                        , job.status === 'in-progress' && '配送中'
+                        , job.status === 'completed' && '完了'
+                      )
+                    )
+                  )
+                  , job.priority === 'urgent' && (
+                    _react2.default.createElement('span', { className: "text-red-500 text-xs font-bold"  ,}, "急ぎ")
+                  )
+                )
+
+                , _react2.default.createElement('div', { className: "space-y-1 mb-3" ,}
+                  , _react2.default.createElement('div', { className: "flex items-center text-sm"  ,}
+                    , _react2.default.createElement('span', { className: "text-gray-500 w-12" ,}, "出発:")
+                    , _react2.default.createElement('span', { className: "font-medium",}, job.from)
+                  )
+                  , _react2.default.createElement('div', { className: "flex items-center text-sm"  ,}
+                    , _react2.default.createElement('span', { className: "text-gray-500 w-12" ,}, "到着:")
+                    , _react2.default.createElement('span', { className: "font-medium",}, job.to)
+                  )
+                )
+
+                , _react2.default.createElement('div', { className: "flex items-center justify-between text-sm"   ,}
+                  , _react2.default.createElement('div', { className: "flex items-center space-x-4"  ,}
+                    , _react2.default.createElement('span', { className: "text-gray-500",}, job.time)
+                    , _react2.default.createElement('span', { className: "text-gray-500",}, job.weight)
+                  )
+                  , _react2.default.createElement('span', { className: "font-bold text-green-600" ,}, "¥", job.reward)
+                )
+              )
+            ))
+          )
+        )
+      )
+
+      , _react2.default.createElement('div', { className: "flex-1 flex flex-col"  ,}
+        , _react2.default.createElement('div', { className: "flex-1 p-6" ,}
+          , _react2.default.createElement(Map, null )
+        )
+        , _react2.default.createElement('div', { className: "h-80 p-6 pt-0"  ,}
+          , _react2.default.createElement(Calendar, null )
+        )
+      )
+    )
+  );
+
+  return (
+    _react2.default.createElement('div', { className: "min-h-screen bg-gray-50" ,}
+      /* Header */
+      , _react2.default.createElement('header', { className: "bg-white shadow-sm border-b"  ,}
+        , _react2.default.createElement('div', { className: "px-6 py-4" ,}
+          , _react2.default.createElement('div', { className: "flex items-center justify-between"  ,}
+            , _react2.default.createElement('div', { className: "flex items-center space-x-6"  ,}
+              , _react2.default.createElement('h1', { className: "text-2xl font-bold text-gray-900"  ,}, "配送ダッシュボード")
+
+              /* Navigation */
+              , _react2.default.createElement('nav', { className: "flex space-x-1 bg-gray-100 rounded-lg p-1"    ,}
+                , _react2.default.createElement('button', {
+                  onClick: () => setCurrentPage('search'),
+                  className: `flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    currentPage === 'search' 
+                      ? 'bg-white text-blue-600 shadow-sm' 
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`,}
+
+                  , _react2.default.createElement(_lucidereact.Search, { className: "w-4 h-4" ,} )
+                  , _react2.default.createElement('span', null, "さがす")
+                )
+                , _react2.default.createElement('button', {
+                  onClick: () => setCurrentPage('work'),
+                  className: `flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    currentPage === 'work' 
+                      ? 'bg-white text-blue-600 shadow-sm' 
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`,}
+
+                  , _react2.default.createElement(_lucidereact.Package, { className: "w-4 h-4" ,} )
+                  , _react2.default.createElement('span', null, "はたらく")
+                )
+              )
+            )
+
+            , _react2.default.createElement('div', { className: "flex items-center space-x-4"  ,}
+              , _react2.default.createElement('button', { className: "relative p-2 text-gray-600 hover:text-gray-900"   ,}
+                , _react2.default.createElement(_lucidereact.Bell, { className: "w-5 h-5" ,} )
+                , _react2.default.createElement('span', { className: "absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"      ,})
+              )
+
+              , _react2.default.createElement('div', { className: "flex items-center space-x-2"  ,}
+                , _react2.default.createElement('div', { className: "w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center"        ,}
+                  , _react2.default.createElement(_lucidereact.User, { className: "w-5 h-5 text-white"  ,} )
+                )
+                , _react2.default.createElement('div', { className: "text-right",}
+                  , _react2.default.createElement('div', { className: "text-sm font-medium text-gray-700"  ,}, "田中太郎")
+                  , _react2.default.createElement('div', { className: "text-xs text-gray-500" ,}, "マイページ")
+                )
+              )
+            )
+          )
+        )
+      )
+
+      /* Main Content */
+      , currentPage === 'search' ? _react2.default.createElement(SearchPage, null ) : _react2.default.createElement(WorkPage, null )
+    )
+  );
+};
+
+exports. default = Dashboard;
+</script></head>
+  <body>
+  
+
+<div id="preview-app"></div></body></html>

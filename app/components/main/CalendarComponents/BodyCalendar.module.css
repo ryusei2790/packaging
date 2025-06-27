@@ -1,0 +1,115 @@
+.calendar-widget {
+    background-color: hsl(var(--white));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    box-shadow: 0 8px 32px hsl(var(--shadow));
+    width: 70%;
+    
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 600;
+    color: hsl(var(--primary-blue));
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+}
+
+.day-header {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: hsl(var(--text-medium));
+    padding: var(--spacing-sm);
+}
+
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-lg);
+}
+
+.date {
+    text-align: center;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.date:hover {
+    background-color: hsl(var(--light-blue));
+}
+
+.date.inactive {
+    color: hsl(var(--text-light));
+}
+
+.date.event {
+    background-color: hsl(var(--primary-blue));
+    color: hsl(var(--white));
+    font-weight: 600;
+}
+
+.calendar-events {
+    border-top: 1px solid hsl(var(--border-light));
+    padding-top: var(--spacing-lg);
+}
+
+.event-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.event-date {
+    font-size: var(--font-size-sm);
+    color: hsl(var(--primary-blue));
+    font-weight: 600;
+}
+
+.event-title {
+    font-size: var(--font-size-sm);
+    color: hsl(var(--text-dark));
+}
+
+.calendarContainer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendarDates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.date {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

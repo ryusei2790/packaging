@@ -4,25 +4,30 @@ import styles from './NavMap.module.css';
 import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
 
 type NavMapProps = {
-  flat?: number; // 出発地の緯度
-  flng?: number; // 出発地の経度
-  llat?: number; // 到着地の緯度
-  llng?: number; // 到着地の経度
+  work: Work | null;
 };
 
-export default function NavMap({ flat, flng, llat, llng }: NavMapProps) {
-  const hasCoords =
-    flat !== undefined && flng !== undefined && llat !== undefined && llng !== undefined;
+export default function NavMap({ work }: NavMapProps) {
+  const hasCoords = !!work;
+    
   const defaultCenter = hasCoords
-    ? { lat: (flat! + llat!) / 2, lng: (flng! + llng!) / 2 }
+    ? {
+        lat: (work!.departure.coordinates.latitude + work!.arrival.coordinates.latitude) / 2,
+        lng: (work!.departure.coordinates.longitude + work!.arrival.coordinates.longitude) / 2,
+      }
     : { lat: 35.656, lng: 139.737 };
 
+    const flat = work?.departure.coordinates.latitude;
+    const flng = work?.departure.coordinates.longitude;
+    const llat = work?.arrival.coordinates.latitude;
+    const llng = work?.arrival.coordinates.longitude;
+    
   return (
     <div className={styles.container}>
       <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
         <Map defaultZoom={6} defaultCenter={defaultCenter} style={{ width: '400px', height: '400px' }} mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}>
-          {hasCoords && <AdvancedMarker position={{ lat: flat!, lng: flng! }} />}
-          {hasCoords && <AdvancedMarker position={{ lat: llat!, lng: llng! }} />}
+          {hasCoords && flat !== undefined && flng !== undefined && (<AdvancedMarker position={{ lat: flat, lng: flng }} />)}
+          {hasCoords && llat !==undefined && flng !== undefined && (<AdvancedMarker position={{ lat: llat, lng: llng }} />)}
         </Map>
       </APIProvider>
     </div>
