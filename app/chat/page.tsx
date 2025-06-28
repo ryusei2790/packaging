@@ -2,6 +2,8 @@
 import styles from './page.module.css';
 import { SessionProvider, useSession } from "next-auth/react";
 import ChatRoom from "./components/ChatRoom";
+import LoginButton from "../components/LoginButton";
+
 
 function InnerChatPage() {
   const { data: session, status } = useSession();
@@ -10,13 +12,18 @@ function InnerChatPage() {
     return <div>読み込み中...</div>;
   }
 
-  if (!session) {
-    return <div>ログインして下さい。</div>;
-  }
-
   return (
     <div className={styles.pageContainer}>
-      <ChatRoom user={session.user} />
+      <LoginButton />
+      {session?.user ? (
+        <ChatRoom user={{
+          id: session.user.email || 'anonymous',
+          name: session.user.name || '',
+          email: session.user.email || ''
+        }} />
+      ) : (
+        <div>ログインしてください</div>
+      )}
     </div>
   );
 }

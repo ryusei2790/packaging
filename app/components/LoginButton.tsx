@@ -7,7 +7,7 @@ export default function LoginButton() {
     if (session) {
         return (
             <div className="flex items-center gap-2">
-                <span>{session.user.name}</span>
+                <span>{session.user?.name}さん</span>
                 <button onClick={() => signOut()} className="bg-red-500 text-white px-2 py-1 rouded">
                     ログアウト
                 </button>
