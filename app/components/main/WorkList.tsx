@@ -40,6 +40,9 @@ export default function WorkList() {
     const fetchWork = async () => {
       const res = await fetch('/data/works.json');
       const data = await res.json();
+      console.log('data:', data);
+      console.log('data type:', typeof data);
+      console.log('data is array:', Array.isArray(data));
       setWorksData(data);
     };
 

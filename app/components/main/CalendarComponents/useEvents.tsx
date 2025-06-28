@@ -19,18 +19,24 @@ const useEvents = () => {
     const fetchEvents = async () => {
       try {
         // ここで実際のAPIエンドポイントに置き換えてください
-        const response = await fetch('/deta/works.json');
+        const response = await fetch('/data/works.json');
         if (!response.ok) {
           throw new Error('イベントの取得に失敗しました');
         }
         const data = await response.json();
-        // timeプロパティがなければ空文字列で補完
-        setEvents(data.map((event: Partial<Event>) => ({
-          id: event.id ?? '',
-          title: event.title ?? '',
-          date: event.date ?? '',
-          time: event.time ?? '',
-        })));
+        
+        // works.jsonの構造に合わせて変換
+        const convertedEvents = data.works.map((work: any) => {
+          const requestDate = new Date(work.requestDate);
+          return {
+            id: work.id.toString(),
+            title: work.title,
+            date: requestDate.toISOString().split('T')[0], // YYYY-MM-DD形式
+            time: requestDate.toTimeString().split(' ')[0], // HH:MM:SS形式
+          };
+        });
+        
+        setEvents(convertedEvents);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
