@@ -1,14 +1,30 @@
 "use client";
 import styles from './page.module.css';
-import { SessionProvider } from "next-auth/react";
-import ChatContent from "./components/ChatContent";
+import { SessionProvider, useSession } from "next-auth/react";
+import ChatRoom from "./components/ChatRoom";
 
-export default function HomePage() {
+function InnerChatPage() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <div>読み込み中...</div>;
+  }
+
+  if (!session) {
+    return <div>ログインして下さい。</div>;
+  }
+
   return (
     <div className={styles.pageContainer}>
-      <SessionProvider>
-        <ChatContent />
-      </SessionProvider>
+      <ChatRoom user={session.user} />
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <SessionProvider>
+      <InnerChatPage />
+    </SessionProvider>
   );
 }
