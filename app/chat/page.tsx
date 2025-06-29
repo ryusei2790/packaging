@@ -14,7 +14,7 @@ export default function ChatPage() {
   if (status === "unauthenticated" || !session?.user) {
     return (
       <div className={styles.pageContainer}>
-        <LoginButton />
+        <LoginButton session={session} />
         <div>ログインしてください</div>
       </div>
     );
@@ -22,8 +22,8 @@ export default function ChatPage() {
 
   return (
     <div className={styles.pageContainer}>
-      <LoginButton />
-      <FriendList />
+      <LoginButton session={session} />
+      <FriendList session={session} />
     </div>
   );
 }

@@ -1,9 +1,18 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 
-export default function LoginButton() {
-    const { data: session } = useSession();
+type Session = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  };
+} | null;
 
+type LoginButtonProps = {
+  session: Session;
+};
+
+export default function LoginButton({ session }: LoginButtonProps) {
     if (session) {
         return (
             <div className="flex items-center gap-2">

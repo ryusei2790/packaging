@@ -3,12 +3,21 @@ import { useEffect, useRef, useCallback } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { db } from "../../../lib/firebase";
 import { collection, addDoc, serverTimestamp, getDocs, query, where } from "firebase/firestore";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function QRScanAddFriend() {
+type Session = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  };
+} | null;
+
+type QRScanAddFriendProps = {
+  session: Session;
+};
+
+export default function QRScanAddFriend({ session }: QRScanAddFriendProps) {
   const qrRef = useRef<HTMLDivElement>(null);
-  const { data: session } = useSession();
   const router = useRouter();
 
   const handleQRScan = useCallback(async (decodedText: string) => {

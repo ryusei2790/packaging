@@ -2,13 +2,22 @@
 import { useState } from "react";
 import { db } from "../../../lib/firebase";
 import { collection, query, where, getDocs, doc, updateDoc, arrayUnion, addDoc, serverTimestamp } from "firebase/firestore";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function FriendAddForm() {
+type Session = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  };
+} | null;
+
+type FriendAddFormProps = {
+  session: Session;
+};
+
+export default function FriendAddForm({ session }: FriendAddFormProps) {
     const [email, setEmail] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { data: session } = useSession();
     const router = useRouter();
 
     const handleAddFriend = async (e?: React.FormEvent) => {

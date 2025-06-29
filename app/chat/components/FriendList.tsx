@@ -3,9 +3,15 @@ import { useEffect, useState, useCallback, useMemo } from "react";
 import { db } from "../../../lib/firebase";
 import { collection, getDocs, query, where, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import FriendAddForm from "./FriendAddForm";
 import QRScanAddFriend from "./QRScanAddFriend";
+
+type Session = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  };
+} | null;
 
 type Friend = { 
     uid: string;
@@ -14,9 +20,12 @@ type Friend = {
     avatar?: string;
 };
 
-export default function FriendList() {
+type FriendListProps = {
+  session: Session;
+};
+
+export default function FriendList({ session }: FriendListProps) {
     const [friends, setFriends] = useState<Friend[]>([]);
-    const { data: session } = useSession();
     const router = useRouter();
 
     // セッション情報をメモ化
@@ -68,8 +77,8 @@ export default function FriendList() {
 
     return (
         <div>
-            <FriendAddForm />
-            <QRScanAddFriend />
+            <FriendAddForm session={session} />
+            <QRScanAddFriend session={session} />
             <h2>友達一覧</h2>
             <ul>
                 {friends.map((friend) => (
