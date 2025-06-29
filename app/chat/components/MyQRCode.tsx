@@ -1,10 +1,18 @@
 "use client";
 import { QRCodeSVG } from "qrcode.react";
-import { useSession } from "next-auth/react";
 
-export default function MyQRCode() {
-    const { data: session } = useSession();
-    
+type Session = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  };
+} | null;
+
+type MyQRCodeProps = {
+  session: Session;
+};
+
+export default function MyQRCode({ session }: MyQRCodeProps) {
     if (!session?.user?.email) return null;
 
     return (

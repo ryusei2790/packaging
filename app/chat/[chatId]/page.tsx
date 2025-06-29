@@ -1,9 +1,19 @@
 "use client";
 import { useParams } from "next/navigation";
 import ChatRoom from "../components/ChatRoom";
-import { SessionProvider } from "next-auth/react";
 
-export default function ChatRoomPage() {
+type Session = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  };
+} | null;
+
+type ChatRoomPageProps = {
+  session: Session;
+};
+
+export default function ChatRoomPage({ session }: ChatRoomPageProps) {
     const params = useParams();
     const { chatId }= params as { chatId: string };
 
@@ -12,11 +22,9 @@ export default function ChatRoomPage() {
     }
 
     return (
-        <SessionProvider>
         <div>
             <h1>チャットルーム</h1>
-            <ChatRoom chatId={chatId} />
+            <ChatRoom chatId={chatId} session={session} />
         </div>
-        </SessionProvider>
     );
 }

@@ -29,12 +29,24 @@ export const authOptions: AuthOptions = {
       return token;
     },
   },
-  pages: {
-    signIn: '/auth/signin',
-  },
   secret: process.env.NEXTAUTH_SECRET,
   debug: false,
   useSecureCookies: process.env.NODE_ENV === "production",
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+      },
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

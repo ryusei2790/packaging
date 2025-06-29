@@ -9,7 +9,13 @@ import {
   onSnapshot,
   serverTimestamp,
 } from "firebase/firestore";
-import { useSession } from "next-auth/react";
+
+type Session = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+  };
+} | null;
 
 type Message = {
   id: string;
@@ -19,10 +25,14 @@ type Message = {
   readBy: string[];
 };
 
-export default function ChatRoom({ chatId }: { chatId: string }) {
+type ChatRoomProps = {
+  chatId: string;
+  session: Session;
+};
+
+export default function ChatRoom({ chatId, session }: ChatRoomProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const { data: session } = useSession();
 
   useEffect(() => {
     const q = query(
@@ -66,6 +76,4 @@ export default function ChatRoom({ chatId }: { chatId: string }) {
       </form>
     </div>
   );
-}
-
 }

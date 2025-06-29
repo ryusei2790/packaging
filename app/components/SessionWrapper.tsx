@@ -2,11 +2,11 @@
 import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
 
-type ClientSessionProviderProps = {
+type SessionWrapperProps = {
   children: ReactNode;
 };
 
-export default function ClientSessionProvider({ children }: ClientSessionProviderProps) {
+export default function SessionWrapper({ children }: SessionWrapperProps) {
   return (
     <SessionProvider 
       refetchInterval={0}
