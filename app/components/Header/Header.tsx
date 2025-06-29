@@ -2,9 +2,7 @@ import React from 'react';
 import styles from "./Header.module.css";
 import Image from "next/image";
 
-
-
-export default function Head() {
+export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>

@@ -1,15 +1,14 @@
 "use client";
+import React, { useState, useEffect } from 'react';
 import styles from './WorkList.module.css';
-import BodyEventCalendar from './BodyEventCalendar';
-
-
 import NavMap from './NavMap';
-import { useEffect, useState } from 'react';
+import BodyEventCalendar from './BodyEventCalendar';
 
 type Work = {
   id: number;
   title: string;
   description: string;
+  requestDate: string;
   departure: {
     city: string;
     address: string;
@@ -20,20 +19,16 @@ type Work = {
     address: string;
     coordinates: { latitude: number; longitude: number };
   };
+  gallery: string[];
 };
-
-
 
 export default function WorkList() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  const [worksData, setWorksData] = useState<{ works: Work[] }>({ works: []});
-
+  const [worksData, setWorksData] = useState<{ works: Work[] }>({ works: [] });
   const selectedWork = worksData.works.find(work => work.id === selectedId) || null;
   
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
-
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -50,15 +45,13 @@ export default function WorkList() {
   }, []);
 
   const filteredWorks = worksData.works.filter((work) => 
-    work.departure.city.toLowerCase().includes(searchTerm.toLowerCase()) &&
-  work.arrival.city.toLowerCase().includes(searchTerm.toLowerCase())
-);
+    work.departure.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    work.arrival.city.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const totalPages = Math.ceil(worksData.works.length / itemsPerPage);
-
+  const totalPages = Math.ceil(filteredWorks.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = worksData.works.slice(startIndex, startIndex + itemsPerPage);
-
+  const currentItems = filteredWorks.slice(startIndex, startIndex + itemsPerPage);
 
   const handleClick = (id: number) => {
     setSelectedId((prev) => (prev === id ? null : id));
@@ -73,7 +66,7 @@ export default function WorkList() {
 
   const handlePrev = () => {
     if (currentPage > 1) {
-      setCurrentPage(prev => prev -1);
+      setCurrentPage(prev => prev - 1);
       setSelectedId(null);
     }
   };
@@ -83,67 +76,58 @@ export default function WorkList() {
     setCurrentPage(1);
   };
 
-
   if (worksData.works.length === 0) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div>
-      <div>
-        {/* 検索ボックス */}
-        <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="出発地か到着地で検索" />
-        {/*リスト表示*/}
-        <ul>
-          
-            {currentItems.map((work) => {
-              const isSelected = work.id === selectedId;
-              return (
-                <li key={work.id} onClick={() => handleClick(work.id)}
-                
-                >
-                  <div >
-                    <span><strong>タイトル：</strong> {work.title}</span>
-                    <span><strong>場所：</strong> {work.departure.city} → {work.arrival.city} </span>
-                  </div>
-                  {isSelected && (
-                    <div >
-                      <div><strong>出発地:</strong> {work.departure.city}（{work.departure.address}） [{work.departure.coordinates.latitude}, {work.departure.coordinates.longitude}]</div>
-                      <div><strong>到着地:</strong> {work.arrival.city}（{work.arrival.address}） [{work.arrival.coordinates.latitude}, {work.arrival.coordinates.longitude}]</div>
-                    </div>
-                  )}
-                  </li>
-              );
-            })}
-        </ul>
-
-        {/* 🔄 ページネーション */}
-        <div>
-          <button
-            onClick={handlePrev}
-            disabled={currentPage === 1}
-            
-          >
-            ← 前へ
+    <div className={styles.container}>
+      <div className={styles.listSection}>
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="出発地または到着地で検索..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className={styles.searchInput}
+          />
+        </div>
+        
+        <div className={styles.workList}>
+          {currentItems.map((work) => (
+            <div
+              key={work.id}
+              className={`${styles.workItem} ${selectedId === work.id ? styles.selected : ''}`}
+              onClick={() => handleClick(work.id)}
+            >
+              <h3>{work.title}</h3>
+              <p>{work.description}</p>
+              <div className={styles.locationInfo}>
+                <p><strong>出発:</strong> {work.departure.city}</p>
+                <p><strong>到着:</strong> {work.arrival.city}</p>
+                <p><strong>依頼日:</strong> {work.requestDate}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className={styles.pagination}>
+          <button onClick={handlePrev} disabled={currentPage === 1}>
+            前へ
           </button>
-
-          <span>ページ {currentPage} / {totalPages}</span>
-
-          <button
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-            
-          >
-            次へ →
+          <span>{currentPage} / {totalPages}</span>
+          <button onClick={handleNext} disabled={currentPage === totalPages}>
+            次へ
           </button>
         </div>
       </div>
-        <div className={styles.NavMap}>
-          <NavMap work={selectedWork} />
-        </div>
-        <div className={styles.Calendar}>
-         <BodyEventCalendar />
-        </div>
+      
+      <div className={styles.mapSection}>
+        <NavMap work={selectedWork} />
+      </div>
+      <div className={styles.Calendar}>
+        <BodyEventCalendar />
+      </div>
     </div>
   );
 } 

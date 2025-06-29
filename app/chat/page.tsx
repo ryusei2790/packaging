@@ -1,37 +1,29 @@
 "use client";
 import styles from './page.module.css';
-import { SessionProvider, useSession } from "next-auth/react";
-import ChatRoom from "./components/ChatRoom";
+import { useSession } from "next-auth/react";
 import LoginButton from "../components/LoginButton";
+import FriendList from "./components/FriendList";
 
-
-function InnerChatPage() {
+export default function ChatPage() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
     return <div>読み込み中...</div>;
   }
 
+  if (status === "unauthenticated" || !session?.user) {
+    return (
+      <div className={styles.pageContainer}>
+        <LoginButton />
+        <div>ログインしてください</div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.pageContainer}>
       <LoginButton />
-      {session?.user ? (
-        <ChatRoom user={{
-          id: session.user.email || 'anonymous',
-          name: session.user.name || '',
-          email: session.user.email || ''
-        }} />
-      ) : (
-        <div>ログインしてください</div>
-      )}
+      <FriendList />
     </div>
-  );
-}
-
-export default function ChatPage() {
-  return (
-    <SessionProvider>
-      <InnerChatPage />
-    </SessionProvider>
   );
 }
