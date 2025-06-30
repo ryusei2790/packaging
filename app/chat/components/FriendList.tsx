@@ -1,22 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { db } from "../../../lib/firebase";
-import { collection, getDocs, query, where, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, getDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import FriendAddForm from "./FriendAddForm";
 import QRScanAddFriend from "./QRScanAddFriend";
 import MyQRCode from "./MyQRCode";
-
-type FriendListProps = {
-  session: Session;
-};
-
-type Session = {
-  user?: {
-    name?: string | null;
-    email?: string | null;
-  };
-} | null;
+import { useSession } from "next-auth/react";
 
 type Friend = { 
     uid: string;
@@ -25,25 +15,31 @@ type Friend = {
     avatar?: string;
 };
 
-export default function FriendList({ session }: FriendListProps) {
+export default function FriendList() {
     const [friends, setFriends] = useState<Friend[]>([]);
+    const { data: session } = useSession();
     const router = useRouter();
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const q = query(collection(db, "users"));
-                const snapshot = await getDocs(q);
-                const users = snapshot.docs.map((doc) => ({ uid: doc.id, ...doc.data() } as Friend));
-                const filtered = users.filter(u => u.email !== session?.user?.email);
-                setFriends(filtered);
-            } catch (error) {
-                console.error("ユーザー取得エラー:", error);
-            }
-        };
-
-        fetchUsers();
+    const fetchFriends = useCallback(async () => {
+        if (!session?.user?.email) return;
+        const userDocRef = doc(db, "users", session.user.email);
+        const userDocSnap = await getDoc(userDocRef);
+        if (!userDocSnap.exists()) return;
+        const userData = userDocSnap.data();
+        const friendEmails: string[] = userData.friends || [];
+        if (friendEmails.length === 0) {
+            setFriends([]);
+            return;
+        }
+        const q = query(collection(db, "users"), where("email", "in", friendEmails.slice(0, 10)));
+        const snapshot = await getDocs(q);
+        const users = snapshot.docs.map((doc) => ({ uid: doc.id, ...doc.data() } as Friend));
+        setFriends(users);
     }, [session?.user?.email]);
+
+    useEffect(() => {
+        fetchFriends();
+    }, [fetchFriends]);
 
     const startChat = async (friend: Friend) => {
         try {
@@ -69,9 +65,9 @@ export default function FriendList({ session }: FriendListProps) {
 
     return (
         <div>
-            <MyQRCode session={session} />
-            <FriendAddForm session={session} />
-            <QRScanAddFriend session={session} />
+            <MyQRCode />
+            <FriendAddForm onFriendAdded={fetchFriends} />
+            <QRScanAddFriend onFriendAdded={fetchFriends} />
             <h2>友達一覧</h2>
             <ul>
                 {friends.map((friend) => (

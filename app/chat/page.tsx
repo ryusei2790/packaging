@@ -13,17 +13,17 @@ export default function ChatPage() {
     return <div>読み込み中...</div>;
   }
 
-  if (!session?.user) {
-    return (
-      <div className={styles.pageContainer}>
-        <p>ログインしてください</p>
-      </div>
-    );
-  }
+  // if (!session?.user) {
+  //   return (
+  //     <div className={styles.pageContainer}>
+  //       <p>ログインしてください</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={styles.pageContainer}>
-      <FriendList session={session}/>
+      <FriendList />
     </div>
   );
 }

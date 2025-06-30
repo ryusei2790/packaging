@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import SessionWrapper from "./components/SessionWrapper";
+import AuthGuard from "./components/AuthGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionWrapper>
-          <Header />
-          {children}
-          <Footer />
+          <AuthGuard>
+            <Header />
+            {children}
+            <Footer />
+          </AuthGuard>
         </SessionWrapper>
       </body>
     </html>

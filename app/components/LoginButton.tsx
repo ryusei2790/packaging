@@ -1,11 +1,14 @@
 "use client";
 import { signIn, signOut } from "next-auth/react";
 
-type Session = {
+// next-auth標準のSession型に揃える
+export type Session = {
   user?: {
     name?: string | null;
     email?: string | null;
+    image?: string | null;
   };
+  expires?: string;
 } | null;
 
 type LoginButtonProps = {
@@ -13,7 +16,7 @@ type LoginButtonProps = {
 };
 
 export default function LoginButton({ session }: LoginButtonProps) {
-    if (session) {
+    if (session?.user) {
         return (
             <div className="flex items-center gap-2">
                 <span>{session.user?.name}さん</span>

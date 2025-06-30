@@ -1,92 +1,46 @@
 "use client";
-import { useEffect, useRef, useCallback } from "react";
-import { Html5Qrcode } from "html5-qrcode";
+import { useState } from "react";
 import { db } from "../../../lib/firebase";
-import { collection, addDoc, serverTimestamp, getDocs, query, where } from "firebase/firestore";
-import { useRouter } from "next/navigation";
-
-type Session = {
-  user?: {
-    name?: string | null;
-    email?: string | null;
-  };
-} | null;
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useSession } from "next-auth/react";
 
 type QRScanAddFriendProps = {
-  session: Session;
+  onFriendAdded: () => void;
 };
 
-export default function QRScanAddFriend({ session }: QRScanAddFriendProps) {
-  const qrRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
+export default function QRScanAddFriend({ onFriendAdded }: QRScanAddFriendProps) {
+  const [scannedEmail, setScannedEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const { data: session } = useSession();
 
-  const handleQRScan = useCallback(async (decodedText: string) => {
-    if (!session?.user?.email) return;
+  const handleScan = (email: string) => {
+    setScannedEmail(email);
+  };
 
-    console.log("QRコード内容:", decodedText);
-
-    const friendEmail = decodedText;
-
-    try {
-      // ① 友達登録
-      const usersQuery = query(collection(db, "users"), where("email", "==", friendEmail));
-      const usersSnapshot = await getDocs(usersQuery);
-
-      if (usersSnapshot.empty) {
-        alert("ユーザーが見つかりませんでした。");
-        return;
-      }
-
-      // ② チャットルーム作成または既存取得
-      const chatsQuery = query(collection(db, "chats"));
-      const chatsSnapshot = await getDocs(chatsQuery);
-      const existingChat = chatsSnapshot.docs.find(doc => {
-        const data = doc.data();
-        return data.members && data.members.includes(session.user!.email) && data.members.includes(friendEmail);
-      });
-
-      let chatId;
-
-      if (existingChat) {
-        chatId = existingChat.id;
-      } else {
-        const newChatRef = await addDoc(collection(db, "chats"), {
-          members: [session.user!.email, friendEmail],
-          createdAt: serverTimestamp(),
-        });
-        chatId = newChatRef.id;
-      }
-
-      router.push(`/chat/${chatId}`);
-    } catch (error) {
-      console.error("QRスキャン処理エラー:", error);
-      alert("処理中にエラーが発生しました");
+  const handleAdd = async () => {
+    if (!scannedEmail || !session?.user?.email) {
+      setMessage("QRコードをスキャンしてください");
+      return;
     }
-  }, [session?.user?.email, router]);
-
-  useEffect(() => {
-    if (!qrRef.current || !session?.user?.email) return;
-
-    const html5QrCode = new Html5Qrcode(qrRef.current.id);
-
-    html5QrCode.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: 250 },
-      handleQRScan,
-      (errorMessage) => {
-        console.warn("QRコード読み取りエラー:", errorMessage);
-      }
-    );
-
-    return () => {
-      html5QrCode.stop().catch(err => console.log("停止エラー:", err));
-    };
-  }, [session?.user?.email, handleQRScan]);
+    try {
+      await addDoc(collection(db, "users"), {
+        email: scannedEmail,
+        addedBy: session.user.email,
+        createdAt: serverTimestamp(),
+      });
+      setMessage("友達を追加しました");
+      setScannedEmail("");
+      onFriendAdded();
+    } catch (error) {
+      setMessage("追加に失敗しました");
+    }
+  };
 
   return (
     <div>
-      <h3>QRコードスキャンで友達追加</h3>
-      <div id="qr-reader" ref={qrRef} style={{ width: "300px", height: "300px" }} />
+      {/* QRコードスキャンUIをここに実装 */}
+      <button onClick={handleAdd}>友達追加</button>
+      {message && <p>{message}</p>}
     </div>
   );
 }
