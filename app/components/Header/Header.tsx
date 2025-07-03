@@ -24,6 +24,7 @@ export default function Header() {
           </div>
           <ul className={styles.navList}>
             <li><Link href="/" className={styles.navLink}>ホーム</Link></li>
+            <li><Link href="requestWork" className={styles.navLink}>お仕事依頼</Link></li>
             <li><Link href="/chat" className={styles.navLink}>チャット</Link></li>
             <li><Link href="/about" className={styles.navLink}>About</Link></li>
             <li><Link href="/contact" className={styles.navLink}>お問い合わせ</Link></li>

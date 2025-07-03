@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { db } from '../../../lib/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 const DATA_PATH = path.join(process.cwd(), 'packaging/public/data/requestWorks.json');
 
@@ -27,11 +29,29 @@ export async function POST(req: NextRequest) {
       id: newId,
       title: body.title,
       description: body.description,
+      category: body.category,
+      requestDate: body.requestDate,
+      departure: body.departure,
+      arrival: body.arrival,
+      gallery: body.gallery,
+      status: body.status,
+      requester: body.requester,
+      cargoDetails: body.cargoDetails,
+      price: body.price,
       createdAt: new Date().toISOString(),
     };
     data.works.push(newWork);
 
     await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2), 'utf-8');
+
+    // Firestoreにも保存
+    try {
+      await addDoc(collection(db, 'works'), newWork);
+    } catch (e) {
+      // Firestore保存失敗時もJSON保存は維持
+      console.error('Firestore保存エラー:', e);
+    }
+
     return NextResponse.json({ message: '保存しました', work: newWork });
   } catch (err) {
     return NextResponse.json({ error: 'サーバーエラー' }, { status: 500 });
