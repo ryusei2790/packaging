@@ -1,22 +1,32 @@
 .container {
     width: 100%;
-    background: var(--background);
-    color: var(--foreground);
+    height: 100%;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
+    gap: 10%;
+    margin: 0;
 }
 
 .listSection, .notListSection {
-    width: 538px;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    background-color: white;
 }
 
-.notListSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.listSection {
+    width: 400px;
+    height: 100%;
+    left: 0; 
+    border-radius: 50px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.notListSection { 
+    width: 70%;
 }
 

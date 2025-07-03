@@ -13,31 +13,24 @@
 }
 
 html, body {
-  min-height: 100vh;
   height: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
+  background-color: gray;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
-  background: var(--background);
-  color: var(--foreground);
 }
 
 main, .main, .pageContainer {
-  flex: 1;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 150%;
   padding-top: 120px; /* header分 */
   padding-bottom: 120px; /* footer分 */
-  padding-left: 32px;
-  padding-right: 32px;
   box-sizing: border-box;
 }
 
@@ -48,14 +41,9 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  display: flex;
-  align-items: center;
-  padding-left: 32px;
-  padding-right: 32px;
+  margin: auto;
+  padding: auto;
 }
 
 footer {
@@ -65,14 +53,12 @@ footer {
   bottom: 0;
   left: 0;
   z-index: 1000;
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
   display: flex;
   align-items: center;
-  padding-left: 32px;
-  padding-right: 32px;
+  margin:auto;
+  padding: auto;
 }
 
 /* スクロールバーがfooterに重ならないように */
@@ -80,8 +66,8 @@ body::-webkit-scrollbar {
   width: 12px;
 }
 body::-webkit-scrollbar-thumb {
-  background: #ccc;
   border-radius: 6px;
+  background: white;
 }
 
 

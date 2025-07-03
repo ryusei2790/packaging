@@ -74,6 +74,231 @@
       "requester": "鈴木一郎",
       "cargoDetails": "サンプル品（食品）",
       "price": 6500
+    },
+    {
+      "id": 1,
+      "title": "配達依頼A",
+      "description": "東京から大阪への書類配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-20T10:00:00+09:00",
+      "departure": {
+        "city": "東京",
+        "address": "東京都千代田区1-1-1",
+        "coordinates": { "latitude": 35.6812, "longitude": 139.7671 }
+      },
+      "arrival": {
+        "city": "大阪",
+        "address": "大阪市北区梅田1-1-1",
+        "coordinates": { "latitude": 34.7025, "longitude": 135.4959 }
+      },
+      "gallery": [
+        "/images/delivery1-1.jpg",
+        "/images/delivery1-2.jpg"
+      ],
+      "status": "pending",
+      "requester": "山田太郎",
+      "cargoDetails": "契約書類一式",
+      "price": 5000
+    },
+    {
+      "id": 2,
+      "title": "配達依頼B",
+      "description": "名古屋から京都への荷物配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-21T14:30:00+09:00",
+      "departure": {
+        "city": "名古屋",
+        "address": "名古屋市中村区名駅1-1-4",
+        "coordinates": { "latitude": 35.1709, "longitude": 136.8815 }
+      },
+      "arrival": {
+        "city": "京都",
+        "address": "京都市下京区烏丸通塩小路下ル東塩小路町",
+        "coordinates": { "latitude": 34.9855, "longitude": 135.7588 }
+      },
+      "gallery": [
+        "/images/delivery2-1.jpg",
+        "/images/delivery2-2.jpg",
+        "/images/delivery2-3.jpg"
+      ],
+      "status": "completed",
+      "requester": "佐藤花子",
+      "cargoDetails": "小型家電2点",
+      "price": 8000
+    },
+    {
+      "id": 3,
+      "title": "配達依頼C",
+      "description": "福岡から広島へのサンプル品配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-22T09:00:00+09:00",
+      "departure": {
+        "city": "福岡",
+        "address": "福岡市博多区博多駅中央街1-1",
+        "coordinates": { "latitude": 33.5902, "longitude": 130.4207 }
+      },
+      "arrival": {
+        "city": "広島",
+        "address": "広島市南区松原町2-37",
+        "coordinates": { "latitude": 34.3966, "longitude": 132.4750 }
+      },
+      "gallery": [
+        "/images/delivery3-1.jpg"
+      ],
+      "status": "in-progress",
+      "requester": "鈴木一郎",
+      "cargoDetails": "サンプル品（食品）",
+      "price": 6500
+    },
+    {
+      "id": 1,
+      "title": "配達依頼A",
+      "description": "東京から大阪への書類配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-20T10:00:00+09:00",
+      "departure": {
+        "city": "東京",
+        "address": "東京都千代田区1-1-1",
+        "coordinates": { "latitude": 35.6812, "longitude": 139.7671 }
+      },
+      "arrival": {
+        "city": "大阪",
+        "address": "大阪市北区梅田1-1-1",
+        "coordinates": { "latitude": 34.7025, "longitude": 135.4959 }
+      },
+      "gallery": [
+        "/images/delivery1-1.jpg",
+        "/images/delivery1-2.jpg"
+      ],
+      "status": "pending",
+      "requester": "山田太郎",
+      "cargoDetails": "契約書類一式",
+      "price": 5000
+    },
+    {
+      "id": 2,
+      "title": "配達依頼B",
+      "description": "名古屋から京都への荷物配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-21T14:30:00+09:00",
+      "departure": {
+        "city": "名古屋",
+        "address": "名古屋市中村区名駅1-1-4",
+        "coordinates": { "latitude": 35.1709, "longitude": 136.8815 }
+      },
+      "arrival": {
+        "city": "京都",
+        "address": "京都市下京区烏丸通塩小路下ル東塩小路町",
+        "coordinates": { "latitude": 34.9855, "longitude": 135.7588 }
+      },
+      "gallery": [
+        "/images/delivery2-1.jpg",
+        "/images/delivery2-2.jpg",
+        "/images/delivery2-3.jpg"
+      ],
+      "status": "completed",
+      "requester": "佐藤花子",
+      "cargoDetails": "小型家電2点",
+      "price": 8000
+    },
+    {
+      "id": 3,
+      "title": "配達依頼C",
+      "description": "福岡から広島へのサンプル品配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-22T09:00:00+09:00",
+      "departure": {
+        "city": "福岡",
+        "address": "福岡市博多区博多駅中央街1-1",
+        "coordinates": { "latitude": 33.5902, "longitude": 130.4207 }
+      },
+      "arrival": {
+        "city": "広島",
+        "address": "広島市南区松原町2-37",
+        "coordinates": { "latitude": 34.3966, "longitude": 132.4750 }
+      },
+      "gallery": [
+        "/images/delivery3-1.jpg"
+      ],
+      "status": "in-progress",
+      "requester": "鈴木一郎",
+      "cargoDetails": "サンプル品（食品）",
+      "price": 6500
+    },
+    {
+      "id": 1,
+      "title": "配達依頼A",
+      "description": "東京から大阪への書類配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-20T10:00:00+09:00",
+      "departure": {
+        "city": "東京",
+        "address": "東京都千代田区1-1-1",
+        "coordinates": { "latitude": 35.6812, "longitude": 139.7671 }
+      },
+      "arrival": {
+        "city": "大阪",
+        "address": "大阪市北区梅田1-1-1",
+        "coordinates": { "latitude": 34.7025, "longitude": 135.4959 }
+      },
+      "gallery": [
+        "/images/delivery1-1.jpg",
+        "/images/delivery1-2.jpg"
+      ],
+      "status": "pending",
+      "requester": "山田太郎",
+      "cargoDetails": "契約書類一式",
+      "price": 5000
+    },
+    {
+      "id": 2,
+      "title": "配達依頼B",
+      "description": "名古屋から京都への荷物配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-21T14:30:00+09:00",
+      "departure": {
+        "city": "名古屋",
+        "address": "名古屋市中村区名駅1-1-4",
+        "coordinates": { "latitude": 35.1709, "longitude": 136.8815 }
+      },
+      "arrival": {
+        "city": "京都",
+        "address": "京都市下京区烏丸通塩小路下ル東塩小路町",
+        "coordinates": { "latitude": 34.9855, "longitude": 135.7588 }
+      },
+      "gallery": [
+        "/images/delivery2-1.jpg",
+        "/images/delivery2-2.jpg",
+        "/images/delivery2-3.jpg"
+      ],
+      "status": "completed",
+      "requester": "佐藤花子",
+      "cargoDetails": "小型家電2点",
+      "price": 8000
+    },
+    {
+      "id": 3,
+      "title": "配達依頼C",
+      "description": "福岡から広島へのサンプル品配達依頼。",
+      "category": "delivery",
+      "requestDate": "2024-06-22T09:00:00+09:00",
+      "departure": {
+        "city": "福岡",
+        "address": "福岡市博多区博多駅中央街1-1",
+        "coordinates": { "latitude": 33.5902, "longitude": 130.4207 }
+      },
+      "arrival": {
+        "city": "広島",
+        "address": "広島市南区松原町2-37",
+        "coordinates": { "latitude": 34.3966, "longitude": 132.4750 }
+      },
+      "gallery": [
+        "/images/delivery3-1.jpg"
+      ],
+      "status": "in-progress",
+      "requester": "鈴木一郎",
+      "cargoDetails": "サンプル品（食品）",
+      "price": 6500
     }
   ],
   "categories": [
