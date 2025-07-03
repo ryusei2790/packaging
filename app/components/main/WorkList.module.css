@@ -1,28 +1,21 @@
 .container {
-    top: 100px;
     width: 100%;
-    height: 100%;
     background: var(--background);
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.listSection {
-    top: 100px;
-    width: 538px;
-    height: 755px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: center;
 }
 
-.notListSection {
-    top: 100px;
+.listSection, .notListSection {
     width: 538px;
-    height: 755px;
+}
+
+.notListSection {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }

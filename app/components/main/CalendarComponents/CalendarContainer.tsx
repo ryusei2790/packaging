@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import BodyCalendar from './BodyCalendar';
 import BodyNavCalendar from './BodyNavCalendar';
 import useEvents from './useEvents';
+import styles from './Calendar.module.css';
 
 // import styles from './BodyEventCalendar.module.css';
 
@@ -29,15 +30,19 @@ const CalendarContainer: React.FC = () => {
   }
 
   return (
-    <div >
+    <div className={styles.calendarSectioin}>
+      <div>
       <BodyCalendar
         events={events}
         onDateSelect={handleDateSelect}
       />
+      </div>
+      <div>
       <BodyNavCalendar
         selectedDate={selectedDate}
         events={events}
       />
+      </div>
     </div>
   );
 };

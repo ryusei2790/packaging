@@ -1,0 +1,12 @@
+.calendarSectioin {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 0;
+}
+

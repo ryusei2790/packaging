@@ -1,7 +1,6 @@
 "use client"
 import React, { useRef } from 'react';
-import FullCalendar, { DateClickArg, EventClickArg, DateSelectArg } from "@fullcalendar/react";
-// import FullCalendar from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -47,7 +46,7 @@ const BodyCalendar: React.FC<BodyCalendarProps> = ({ onDateSelect, events }) => 
       <FullCalendar
         locale='ja' // 言語を日本語に設定
         allDayText="終日" // 「終日」の表示用テキスト
-        height="auto" // ヘッダーとフッターを含むカレンダー全体の高さを設定する
+        height={350} // 枠に必ず1ヶ月分が収まるように固定
         plugins={[timeGridPlugin,dayGridPlugin,interactionPlugin]}// プラグインを読み込む
         initialView="dayGridMonth"// カレンダーが読み込まれたときの初期ビュー
         slotDuration="00:30:00" // タイムスロットを表示する頻度。
