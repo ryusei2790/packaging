@@ -133,12 +133,13 @@ export default function WorkList() {
           </button>
         </div>
       </div>
-      
-      <div className={styles.mapSection}>
-        <NavMap work={selectedWork} />
-      </div>
-      <div className={styles.Calendar}>
-        <BodyEventCalendar />
+      <div className={styles.notListSection}>
+        <div className={styles.Calendar}>
+          <BodyEventCalendar />
+        </div>
+        <div className={styles.mapSection}>
+          <NavMap work={selectedWork} />
+        </div>
       </div>
     </div>
   );
