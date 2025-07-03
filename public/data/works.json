@@ -20,7 +20,10 @@
         "/images/delivery1-1.jpg",
         "/images/delivery1-2.jpg"
       ],
-      "status": "pending"
+      "status": "pending",
+      "requester": "山田太郎",
+      "cargoDetails": "契約書類一式",
+      "price": 5000
     },
     {
       "id": 2,
@@ -43,7 +46,10 @@
         "/images/delivery2-2.jpg",
         "/images/delivery2-3.jpg"
       ],
-      "status": "completed"
+      "status": "completed",
+      "requester": "佐藤花子",
+      "cargoDetails": "小型家電2点",
+      "price": 8000
     },
     {
       "id": 3,
@@ -64,7 +70,10 @@
       "gallery": [
         "/images/delivery3-1.jpg"
       ],
-      "status": "in-progress"
+      "status": "in-progress",
+      "requester": "鈴木一郎",
+      "cargoDetails": "サンプル品（食品）",
+      "price": 6500
     }
   ],
   "categories": [

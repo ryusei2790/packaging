@@ -20,6 +20,9 @@ type Work = {
     coordinates: { latitude: number; longitude: number };
   };
   gallery: string[];
+  requester: string;
+  cargoDetails: string;
+  price: number;
 };
 
 export default function WorkList() {
@@ -95,18 +98,27 @@ export default function WorkList() {
         
         <div className={styles.workList}>
           {currentItems.map((work) => (
-            <div
-              key={work.id}
-              className={`${styles.workItem} ${selectedId === work.id ? styles.selected : ''}`}
-              onClick={() => handleClick(work.id)}
-            >
-              <h3>{work.title}</h3>
-              <p>{work.description}</p>
-              <div className={styles.locationInfo}>
-                <p><strong>出発:</strong> {work.departure.city}</p>
-                <p><strong>到着:</strong> {work.arrival.city}</p>
-                <p><strong>依頼日:</strong> {work.requestDate}</p>
+            <div key={work.id}>
+              <div
+                className={`${styles.workItem} ${selectedId === work.id ? styles.selected : ''}`}
+                onClick={() => handleClick(work.id)}
+              >
+                <h3>{work.title}</h3>
+                <p>{work.description}</p>
+                <div className={styles.locationInfo}>
+                  <p><strong>出発:</strong> {work.departure.city}</p>
+                  <p><strong>到着:</strong> {work.arrival.city}</p>
+                  <p><strong>依頼日:</strong> {work.requestDate}</p>
+                </div>
               </div>
+              {selectedId === work.id && (
+                <div className={styles.detailBox}>
+                  <h4>詳細情報</h4>
+                  <p><strong>依頼者:</strong> {work.requester}</p>
+                  <p><strong>荷物内容:</strong> {work.cargoDetails}</p>
+                  <p><strong>料金:</strong> {work.price}円</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
