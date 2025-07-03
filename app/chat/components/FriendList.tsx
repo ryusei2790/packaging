@@ -65,9 +65,11 @@ export default function FriendList() {
 
     return (
         <div>
-            <MyQRCode />
-            <FriendAddForm onFriendAdded={fetchFriends} />
-            <QRScanAddFriend onFriendAdded={fetchFriends} />
+            <div className="flex flex-col items-center justify-center">
+                <MyQRCode />
+                <FriendAddForm onFriendAdded={fetchFriends} />
+                <QRScanAddFriend onFriendAdded={fetchFriends} />
+            </div>
             <h2>友達一覧</h2>
             <ul>
                 {friends.map((friend) => (

@@ -2,18 +2,7 @@
 import { useParams } from "next/navigation";
 import ChatRoom from "../components/ChatRoom";
 
-type Session = {
-  user?: {
-    name?: string | null;
-    email?: string | null;
-  };
-} | null;
-
-type ChatRoomPageProps = {
-  session: Session;
-};
-
-export default function ChatRoomPage({ session }: ChatRoomPageProps) {
+export default function ChatRoomPage() {
     const params = useParams();
     const { chatId }= params as { chatId: string };
 
@@ -24,7 +13,7 @@ export default function ChatRoomPage({ session }: ChatRoomPageProps) {
     return (
         <div>
             <h1>チャットルーム</h1>
-            <ChatRoom chatId={chatId} session={session} />
+            <ChatRoom chatId={chatId} />
         </div>
     );
 }
