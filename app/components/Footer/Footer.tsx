@@ -4,7 +4,7 @@ import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <div className={styles.footer}>
       <div className={styles.container}>
         <nav className={styles.nav}>
           <ul className={styles.navList}>
@@ -14,6 +14,6 @@ export default function Footer() {
           </ul>
         </nav>
       </div>
-    </footer>
+    </div>
   );
 }

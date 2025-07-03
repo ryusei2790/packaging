@@ -30,11 +30,12 @@ export default function RootLayout({
     <html lang="ja">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
         <SessionWrapper>
           <AuthGuard>
             <Header />
-            {children}
+            <main style={{ flex: 1 }}>{children}</main>
             <Footer />
           </AuthGuard>
         </SessionWrapper>

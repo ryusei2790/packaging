@@ -1,3 +1,23 @@
+# Packaging Project
+
+このプロジェクトは Next.js（appディレクトリ構成）＋ next-auth ＋ Firebase Firestore/Storage ＋ ローカルJSON保存を組み合わせたチャット・ワーク管理アプリです。
+
+- Google認証によるログイン（next-auth）
+- Firestoreを使ったチャット・友達管理
+- ワーク（依頼）情報の登録・管理（JSONファイルとFirestore両方に保存）
+- 画像アップロード（Firebase Storage）
+- QRコードによる友達追加
+- 認証ガード・セッション管理
+
+---
+
+## 今後の方針
+
+デプロイ先として **Google Cloud Platform (GCP)** を選定しています。
+そのため、GCPの各種サービス（Cloud Run, Firestore, Storage, IAMなど）の学習・検証も今後進めていきます。
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
