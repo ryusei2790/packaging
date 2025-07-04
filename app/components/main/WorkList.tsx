@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import {useRouter, useSearchParams } from 'next/navigation';
 import styles from './WorkList.module.css';
 import NavMap from './NavMap';
 import BodyEventCalendar from './BodyEventCalendar';
@@ -29,32 +30,51 @@ export default function WorkList() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [worksData, setWorksData] = useState<{ works: Work[] }>({ works: [] });
   const selectedWork = worksData.works.find(work => work.id === selectedId) || null;
-  
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 4;
   const [searchTerm, setSearchTerm] = useState('');
+  const searchParams = useSearchParams();//newData=>Data, response=>res
+
+  // const [style, setStyle] = useState('style');
+
+  // useEffect(() => {
+  //   const fetchWork = async () => {
+  //     const res = await fetch('/data/works.json');
+  //     const data = await res.json();
+  //     console.log('data:', data);
+  //     console.log('data type:', typeof data);
+  //     console.log('data is array:', Array.isArray(data));
+  //     setWorksData(data);
+  //   };
+
+  //   fetchWork();
+  // }, []);
+
+  async function fetchData(page) {
+    try{
+      const res = await fetch(`/data/works.json`);
+      if (!res.ok) {
+        throw new Error("Bad response");
+      }
+      const Data = await res.json();
+      setTotalPages(Data.totalPages);
+      setCurrentPage(Data.currentPage);
+      setWorksData(Data.items);
+    } catch (error) {
+      console.error("Failed:", error);
+    }
+  }
 
   useEffect(() => {
-    const fetchWork = async () => {
-      const res = await fetch('/data/works.json');
-      const data = await res.json();
-      console.log('data:', data);
-      console.log('data type:', typeof data);
-      console.log('data is array:', Array.isArray(data));
-      setWorksData(data);
-    };
+    const page = parseInt(searchParams.get('page') || '1', 10);
+    fetchData(page);
+  },[searchParams]);
 
-    fetchWork();
-  }, []);
-
-  const filteredWorks = worksData.works.filter((work) => 
-    work.departure.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    work.arrival.city.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const totalPages = Math.ceil(filteredWorks.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = filteredWorks.slice(startIndex, startIndex + itemsPerPage);
+  const generationPagination = () => {
+    const pages = [];
+    for (let i = 1; i <=)
+  }
 
   const handleClick = (id: number) => {
     setSelectedId((prev) => (prev === id ? null : id));
@@ -62,6 +82,7 @@ export default function WorkList() {
 
   const handleNext = () => {
     if (currentPage < totalPages) {
+
       setCurrentPage(prev => prev + 1);
       setSelectedId(null);
     }
@@ -74,6 +95,18 @@ export default function WorkList() {
     }
   };
 
+
+//検索機能
+  const filteredWorks = worksData.works.filter((work) => 
+    work.departure.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    work.arrival.city.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentItems = filteredWorks.slice(startIndex, startIndex + itemsPerPage);
+
+  // const totalPages = Math.ceil(filteredWorks.length / itemsPerPage);
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
@@ -82,6 +115,8 @@ export default function WorkList() {
   if (worksData.works.length === 0) {
     return <p>Loading...</p>;
   }
+
+  // let workList = 
 
   return (
     <div className={styles.container}>
