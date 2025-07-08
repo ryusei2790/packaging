@@ -5,7 +5,7 @@ import CalendarContainer from './CalendarComponents/CalendarContainer';
 
 export default function BodyEventCalendar() {
     return (
-        <div className={styles.Container}>
+        <div className={styles.container}>
             <div className={styles.calendarMain}>
             <CalendarContainer />
             </div>
